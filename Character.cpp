@@ -143,7 +143,7 @@ void Character::CharacterUpdate()
             }
             
             //if the jump key is not pressed, the jump speed is decreased
-            if(!KeyState(SDL_SCANCODE_UP) && mSpeed.y > 0.0f)
+            if(!KeyState(SDL_SCANCODE_UP) && mSpeed.y < 0.0f)
             {
                 mSpeed.y = std::max(mSpeed.y, -MIN_JUMP_SPEED);
             }
