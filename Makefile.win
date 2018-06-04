@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = Objects/main.o Objects/movingObject.o Objects/Character.o Objects/LTexture.o
-LINKOBJ  = Objects/main.o Objects/movingObject.o Objects/Character.o Objects/LTexture.o
+OBJ      = Objects/main.o Objects/movingObject.o Objects/Character.o Objects/LTexture.o Objects/LTimer.o
+LINKOBJ  = Objects/main.o Objects/movingObject.o Objects/Character.o Objects/LTexture.o Objects/LTimer.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/SDL2_image-2.0.1/x86_64-w64-mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/SDL2_ttf-2.0.14/x86_64-w64-mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/SDL2_mixer-2.0.1/x86_64-w64-mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/SDL2-2.0.8/x86_64-w64-mingw32/lib" -static-libgcc -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lmingw32  -lSDL2main -lSDL2  -lSDL2_image  -lSDL2_ttf  -lSDL2_mixer -lwsock32 -lws2_32
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/7.2.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/7.2.0/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++" -I"C:/Program Files (x86)/Dev-Cpp/SDL2_image-2.0.1/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/SDL2_mixer-2.0.1/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/SDL2_ttf-2.0.14/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/SDL2-2.0.8/x86_64-w64-mingw32/include"
@@ -35,3 +35,6 @@ Objects/Character.o: Character.cpp
 
 Objects/LTexture.o: LTexture.cpp
 	$(CPP) -c LTexture.cpp -o Objects/LTexture.o $(CXXFLAGS)
+
+Objects/LTimer.o: LTimer.cpp
+	$(CPP) -c LTimer.cpp -o Objects/LTimer.o $(CXXFLAGS)

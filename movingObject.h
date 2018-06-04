@@ -12,7 +12,6 @@
 class movingObject
 {
 	public:
-		const int VELOCITY = 1;
 
 		movingObject();
 
@@ -44,16 +43,6 @@ class movingObject
 
 		bool mWasAtCeiling;
 		bool mAtCeiling;
-		
-		//The possibles Character's state
-		enum CharacterState
-		{
-			Stand,
-			Walk,
-			Jump,
-			GrabLedge,
-			TotalStates
-		};
 
 		CharacterState mCurrentState = CharacterState::Stand;
 		float mJumpSpeed;

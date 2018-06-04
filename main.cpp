@@ -6,25 +6,27 @@
 
 #include "Character.h"
 #include "LTexture.h"
+#include "LTimer.h"
 
 using namespace std;
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGT = 480;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGT = 720;
 
-const float cWalkSpeed = 160.0f;
-const float cJumpSpeed = -400.0f;
-const float cMinJumpSpeed = 200.0f;
+const float cWalkSpeed = 400.0f;
+const float cJumpSpeed = -500.0f;
 const float cHalfSizeY = 20.0f;
 const float cHalfSizeX = 6.0f;
 
-
+SDL_Rect gCharacterSpirteClips[TotalStates + 1];
 
 Character c;
 
 SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
 
+LTimer stepTimer;
+float timeStep = 0;
 
 void CharacterInit()
 {
@@ -82,11 +84,37 @@ bool loadMedia()
 {
 	bool success = true;
 
-	if(!c.mTexture.loadFromFile("foo.png"))
+	if(!c.mTexture.loadFromFile("images/mario.png"))
 	{
 		success = false;
 		cout << "Error loading foo texture " << IMG_GetError() << endl;
 	}
+	else
+	{
+		gCharacterSpirteClips[ Stand ].x = 0;
+        gCharacterSpirteClips[ Stand ].y = 0;
+        gCharacterSpirteClips[ Stand ].w = 40;
+        gCharacterSpirteClips[ Stand ].h = 56;
+
+        //Set top right sprite
+        gCharacterSpirteClips[ Walk ].x = 42;
+        gCharacterSpirteClips[ Walk ].y = 0;
+        gCharacterSpirteClips[ Walk ].w = 44;
+        gCharacterSpirteClips[ Walk ].h = 60;
+        
+        //Set bottom left sprite
+        gCharacterSpirteClips[ Walk2Frame ].x = 88;
+        gCharacterSpirteClips[ Walk2Frame ].y = 0;
+        gCharacterSpirteClips[ Walk2Frame ].w = 30;
+        gCharacterSpirteClips[ Walk2Frame ].h = 60;
+
+        //Set bottom right sprite
+        gCharacterSpirteClips[ Jump ].x = 121;
+        gCharacterSpirteClips[ Jump ].y = 0;
+        gCharacterSpirteClips[ Jump ].w = 47;
+        gCharacterSpirteClips[ Jump ].h = 60;
+    }
+	
 
 	return success;
 }
@@ -130,13 +158,25 @@ int main( int argc, char* args[] )
 					}
 				}
 
+				cout << "TimeStep: " << timeStep << endl;
+				timeStep = stepTimer.getTicks() / 1000.f;
+
 				SDL_RenderClear(gRenderer);
 				
 				c.CharacterUpdate();
 
+				cout << c.mPosition.y << endl;
+
+				stepTimer.start();
+
+				
 				SDL_RenderPresent(gRenderer);
 
-				SDL_Delay(10);
+				if(timeStep < 1/60.f)
+				{
+					SDL_Delay(1000 * (1/60.f - timeStep));
+				}
+
 			}
 		}
 	}

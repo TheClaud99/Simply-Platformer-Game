@@ -31,7 +31,7 @@ void Character::CharacterUpdate()
     {
         case CharacterState::Stand:
 
-            mTexture.render(mPosition.x, mPosition.y);
+            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Stand]);
             
             mSpeed = {0.0f, 0.0f};
             
@@ -65,7 +65,23 @@ void Character::CharacterUpdate()
         
         case CharacterState::Walk:
             
-            mTexture.render(mPosition.x, mPosition.y);
+            
+
+            mElapsedTime += timeStep;
+
+            if(mElapsedTime < FRAME_MOVEMENT_UPDATE_TIME)
+            {
+                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk]);
+            }
+            else if(mElapsedTime < 2 * FRAME_MOVEMENT_UPDATE_TIME)
+            {
+                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk2Frame]);
+            }
+            else
+            {
+                mElapsedTime = 0;
+            }
+
             if(KeyState(SDL_SCANCODE_RIGHT) == KeyState(SDL_SCANCODE_LEFT))
             {
                 mCurrentState = CharacterState::Stand;
@@ -111,8 +127,8 @@ void Character::CharacterUpdate()
 
         case CharacterState::Jump:
 
-            mTexture.render(mPosition.x, mPosition.y);
-            mSpeed.y += GRAVITY * VELOCITY;
+            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Jump]);
+            mSpeed.y += GRAVITY * timeStep;
             mSpeed.y = std::min(mSpeed.y, MAX_FALLING_SPEED);
 
             if(KeyState(SDL_SCANCODE_RIGHT) == KeyState(SDL_SCANCODE_LEFT))
@@ -145,7 +161,7 @@ void Character::CharacterUpdate()
             //if the jump key is not pressed, the jump speed is decreased
             if(!KeyState(SDL_SCANCODE_UP) && mSpeed.y < 0.0f)
             {
-                mSpeed.y = std::max(mSpeed.y, -MIN_JUMP_SPEED);
+                mSpeed.y = std::max(mSpeed.y, MIN_JUMP_SPEED);
             }
 
             if(mOnGround)

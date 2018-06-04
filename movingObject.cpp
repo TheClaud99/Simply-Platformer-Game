@@ -35,9 +35,10 @@ void movingObject::UpdatePhysics()
 	mPushedLeftWall = mPushesLeftWall;
 	mWasAtCeiling = mAtCeiling;
 
+	printf("\n %f", mSpeed.y);
 	//Update the position.
-	mPosition.x += mSpeed.x * VELOCITY/60;
-	mPosition.y += (int)(mSpeed.y * VELOCITY/50);
+	mPosition.x += (int)(mSpeed.x * timeStep);
+	mPosition.y += (int)(mSpeed.y * timeStep);
 
 	//Check if it's on ground.
 	if(mPosition.y >= GROUND)

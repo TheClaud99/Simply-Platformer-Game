@@ -21,6 +21,8 @@ class Character : public movingObject
 
 		bool mInputs[284];
 		bool mPrevInputs[284];
+
+		float mElapsedTime;
 };
 
 #endif

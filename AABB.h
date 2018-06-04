@@ -14,9 +14,26 @@ struct AABB
 	Vector halfsize;
 };
 
-const float GRAVITY = 9.81;
-const float MAX_FALLING_SPEED = 150.0;
-const float MIN_JUMP_SPEED = -80.0;
+const float GRAVITY = 700.0f;
+const float MAX_FALLING_SPEED = 1000.0f;
+const float MIN_JUMP_SPEED = -400.0f;
+const float VELOCITY = 1.0f;
+const float FRAME_MOVEMENT_UPDATE_TIME = 0.25f;
 
+extern float timeStep;
 
-const int GROUND = 300;
+const int GROUND = 600;
+
+//The possibles Character's state
+enum CharacterState
+{
+    Stand,
+    Walk,
+    Jump,
+    GrabLedge,
+    TotalStates
+};
+
+const int Walk2Frame = TotalStates;
+
+extern SDL_Rect gCharacterSpirteClips[];
