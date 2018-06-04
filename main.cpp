@@ -124,6 +124,10 @@ int main( int argc, char* args[] )
 					{
 						c.mInputs[SDL_GetScancodeFromKey(e.key.keysym.sym)] = true;
 					}
+					else if(e.type == SDL_KEYUP)
+					{
+						c.mInputs[SDL_GetScancodeFromKey(e.key.keysym.sym)] = false;
+					}
 				}
 
 				SDL_RenderClear(gRenderer);

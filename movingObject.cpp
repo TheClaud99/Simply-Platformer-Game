@@ -2,7 +2,17 @@
 
 movingObject::movingObject()
 {
+	mPushedRightWall = false;
+	mPushesRightWall = false;
 
+	mPushedLeftWall = false;
+	mPushesLeftWall = false;
+
+	mWasOnGround = false;
+	mOnGround = false;
+
+	mWasAtCeiling = false;
+	mAtCeiling = false;
 }
 
 

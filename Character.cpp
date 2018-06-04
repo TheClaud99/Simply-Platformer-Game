@@ -16,7 +16,7 @@ bool Character::Relased(SDL_Scancode key)
 
 bool Character::KeyState(SDL_Scancode key)
 {
-    return (!mInputs[(int)key] && mPrevInputs[(int)key]);
+    return mInputs[(int)key];
 }
 
 bool Character::Pressed(SDL_Scancode key)
@@ -42,6 +42,8 @@ void Character::CharacterUpdate()
                 break;
             }
 
+            printf("\n %d", KeyState(SDL_SCANCODE_RIGHT));
+
             //If a movement key is pressed, change the state to Move
             if(KeyState(SDL_SCANCODE_RIGHT) != KeyState(SDL_SCANCODE_LEFT))
             {
@@ -51,7 +53,7 @@ void Character::CharacterUpdate()
             break;
         
         case CharacterState::Walk:
-
+            
             mTexture.render(mPosition.x, mPosition.y);
             if(KeyState(SDL_SCANCODE_RIGHT) == KeyState(SDL_SCANCODE_LEFT))
             {
@@ -97,8 +99,9 @@ void Character::CharacterUpdate()
             break;
 
         case CharacterState::Jump:
+
             mTexture.render(mPosition.x, mPosition.y);
-            mSpeed.y += GRAVITY * VELOCITY;
+            mSpeed.y += GRAVITY;
             mSpeed.y = std::min(mSpeed.y, MAX_FALLING_SPEED);
 
             if(KeyState(SDL_SCANCODE_RIGHT) == KeyState(SDL_SCANCODE_LEFT))
@@ -127,12 +130,17 @@ void Character::CharacterUpdate()
                     mSpeed.x = -mWalkSpeed;
                 }
             }
-            /*
+            
             //if the jump key is not pressed, the jump speed is decreased
             if(!KeyState(SDL_SCANCODE_UP) && mSpeed.y > 0.0f)
             {
-                mSpeed.y = std::min(mSpeed.y, MIN_JUMP_SPEED);
-            }*/
+                mSpeed.y = std::max(mSpeed.y, -MIN_JUMP_SPEED);
+            }
+
+            if(mOnGround)
+            {
+                mCurrentState = CharacterState::Stand;
+            }
 
             break;
 
@@ -143,8 +151,8 @@ void Character::CharacterUpdate()
     
     UpdatePhysics();
 
-    printf("\n Position: %d", mPosition.y);
-    printf("\n Speed: %f", mSpeed.y);
+    /*printf("\n Position: %d", mPosition.y);
+    printf("\n Speed: %f", mSpeed.y);*/
     UpdatePrevInputs();
 }
 

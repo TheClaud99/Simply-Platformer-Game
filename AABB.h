@@ -14,9 +14,9 @@ struct AABB
 	Vector halfsize;
 };
 
-const float GRAVITY = 9.81;
-const float MAX_FALLING_SPEED = 50.0;
+const float GRAVITY = 1;
+const float MAX_FALLING_SPEED = 500.0;
 const float MIN_JUMP_SPEED = 10.0;
 
 
-const int GROUND = 400;
+const int GROUND = 300;
