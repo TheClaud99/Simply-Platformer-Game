@@ -13,7 +13,7 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGT = 480;
 
 const float cWalkSpeed = 160.0f;
-const float cJumpSpeed = 410.0f;
+const float cJumpSpeed = -150.0f;
 const float cMinJumpSpeed = 200.0f;
 const float cHalfSizeY = 20.0f;
 const float cHalfSizeX = 6.0f;

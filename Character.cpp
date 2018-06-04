@@ -42,12 +42,23 @@ void Character::CharacterUpdate()
                 break;
             }
 
-            printf("\n %d", KeyState(SDL_SCANCODE_RIGHT));
 
             //If a movement key is pressed, change the state to Move
             if(KeyState(SDL_SCANCODE_RIGHT) != KeyState(SDL_SCANCODE_LEFT))
             {
                 mCurrentState = CharacterState::Walk;
+            }
+
+            if(KeyState(SDL_SCANCODE_UP))
+            {
+                mSpeed.y = mJumpSpeed;
+                mCurrentState = CharacterState::Jump;
+                break;
+            }
+            else if(!mOnGround)
+            {
+                mCurrentState = CharacterState::Jump;
+                break;
             }
 
             break;
@@ -101,7 +112,7 @@ void Character::CharacterUpdate()
         case CharacterState::Jump:
 
             mTexture.render(mPosition.x, mPosition.y);
-            mSpeed.y += GRAVITY;
+            mSpeed.y += GRAVITY * VELOCITY;
             mSpeed.y = std::min(mSpeed.y, MAX_FALLING_SPEED);
 
             if(KeyState(SDL_SCANCODE_RIGHT) == KeyState(SDL_SCANCODE_LEFT))
