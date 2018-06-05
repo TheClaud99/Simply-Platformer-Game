@@ -1,6 +1,9 @@
 #include "SDL2/SDL.h"
 
 
+const int LEVEL_WIDTH = 1200;
+const int LEVEL_HEIGHT = 960;
+
 struct Vector
 {
     float x;
@@ -11,13 +14,12 @@ struct Vector
 struct AABB
 {
 	SDL_Point center;
-	Vector halfsize;
+	SDL_Point halfsize;
 };
 
-const float GRAVITY = 700.0f;
-const float MAX_FALLING_SPEED = 1000.0f;
+const float GRAVITY = 1400.0f;
+const float MAX_FALLING_SPEED = 1500.0f;
 const float MIN_JUMP_SPEED = -400.0f;
-const float VELOCITY = 1.0f;
 const float FRAME_MOVEMENT_UPDATE_TIME = 0.25f;
 
 extern float timeStep;

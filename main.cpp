@@ -10,11 +10,11 @@
 
 using namespace std;
 
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGT = 720;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGT = 480;
 
 const float cWalkSpeed = 400.0f;
-const float cJumpSpeed = -500.0f;
+const float cJumpSpeed = -800.0f;
 const float cHalfSizeY = 20.0f;
 const float cHalfSizeX = 6.0f;
 
@@ -32,8 +32,6 @@ float timeStep = 0;
 
 void CharacterInit()
 {
-	c.mAABB.halfsize = {cHalfSizeX, cHalfSizeY};
-	c.mAABBOffset.center.y = c.mAABB.halfsize.y;
 
 	c.mJumpSpeed = cJumpSpeed;
 	c.mWalkSpeed = cWalkSpeed;
@@ -170,7 +168,6 @@ int main( int argc, char* args[] )
 					}
 				}
 
-				cout << "TimeStep: " << timeStep << endl;
 				timeStep = stepTimer.getTicks() / 1000.f;
 
 				SDL_RenderClear(gRenderer);
@@ -178,8 +175,6 @@ int main( int argc, char* args[] )
 				gBackGroundTexture.render(0, 0);
 
 				c.CharacterUpdate();
-
-				cout << c.mPosition.y << endl;
 
 				stepTimer.start();
 

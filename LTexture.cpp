@@ -41,6 +41,7 @@ bool LTexture::loadFromFile(std::string path)
         if(newTexture != NULL)
         {
             mTexture = newTexture;
+
             mWidth = loadedSurface -> w;
             mHeight = loadedSurface -> h;
         }

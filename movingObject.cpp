@@ -35,7 +35,6 @@ void movingObject::UpdatePhysics()
 	mPushedLeftWall = mPushesLeftWall;
 	mWasAtCeiling = mAtCeiling;
 
-	printf("\n %f", mSpeed.y);
 	//Update the position.
 	mPosition.x += (int)(mSpeed.x * timeStep);
 	mPosition.y += (int)(mSpeed.y * timeStep);

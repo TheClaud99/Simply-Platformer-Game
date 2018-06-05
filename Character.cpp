@@ -184,10 +184,14 @@ void Character::CharacterUpdate()
         mFlip = SDL_FLIP_NONE;
     }
 
+    mAABB.halfsize.x = gCharacterSpirteClips[mCurrentState].w / 2;
+    mAABB.halfsize.y = gCharacterSpirteClips[mCurrentState].h / 2;
+
+    mAABBOffset.center.y = mAABB.halfsize.y;
+
     UpdatePhysics();
 
-    /*printf("\n Position: %d", mPosition.y);
-    printf("\n Speed: %f", mSpeed.y);*/
+
     UpdatePrevInputs();
 }
 
