@@ -16,14 +16,13 @@ class LTexture
 
 		bool loadFromFile(std::string path);
 
-		void render(int x, int y, SDL_Rect* clip = NULL);
+		void render(int x, int y, SDL_Rect* clip = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 		void free();
 
 		int getWidth();
 		int getHeight();
 
-	protected:
 		int mWidth;
 		int mHeight;
 		SDL_Texture* mTexture;

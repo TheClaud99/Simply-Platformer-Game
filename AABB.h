@@ -22,7 +22,7 @@ const float FRAME_MOVEMENT_UPDATE_TIME = 0.25f;
 
 extern float timeStep;
 
-const int GROUND = 600;
+const int GROUND = 400;
 
 //The possibles Character's state
 enum CharacterState

@@ -25,6 +25,8 @@ Character c;
 SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
 
+LTexture gBackGroundTexture;
+
 LTimer stepTimer;
 float timeStep = 0;
 
@@ -115,6 +117,16 @@ bool loadMedia()
         gCharacterSpirteClips[ Jump ].h = 60;
     }
 	
+	if(!gBackGroundTexture.loadFromFile("images/background.png"))
+	{
+		success = false;
+		cout << IMG_GetError() << endl;
+	}
+	else
+	{
+		gBackGroundTexture.mWidth = SCREEN_WIDTH;
+		gBackGroundTexture.mHeight = SCREEN_HEIGT;
+	}
 
 	return success;
 }
@@ -163,6 +175,8 @@ int main( int argc, char* args[] )
 
 				SDL_RenderClear(gRenderer);
 				
+				gBackGroundTexture.render(0, 0);
+
 				c.CharacterUpdate();
 
 				cout << c.mPosition.y << endl;

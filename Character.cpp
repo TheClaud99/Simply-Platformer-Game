@@ -31,7 +31,7 @@ void Character::CharacterUpdate()
     {
         case CharacterState::Stand:
 
-            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Stand]);
+            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Stand], mFlip);
             
             mSpeed = {0.0f, 0.0f};
             
@@ -71,11 +71,11 @@ void Character::CharacterUpdate()
 
             if(mElapsedTime < FRAME_MOVEMENT_UPDATE_TIME)
             {
-                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk]);
+                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk], mFlip);
             }
             else if(mElapsedTime < 2 * FRAME_MOVEMENT_UPDATE_TIME)
             {
-                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk2Frame]);
+                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk2Frame], mFlip);
             }
             else
             {
@@ -127,7 +127,7 @@ void Character::CharacterUpdate()
 
         case CharacterState::Jump:
 
-            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Jump]);
+            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Jump], mFlip);
             mSpeed.y += GRAVITY * timeStep;
             mSpeed.y = std::min(mSpeed.y, MAX_FALLING_SPEED);
 
@@ -175,7 +175,15 @@ void Character::CharacterUpdate()
             break;
     }
 
-    
+    if(mSpeed.x < 0)
+    {
+        mFlip = SDL_FLIP_HORIZONTAL;
+    }
+    else if(mSpeed.x > 0)
+    {
+        mFlip = SDL_FLIP_NONE;
+    }
+
     UpdatePhysics();
 
     /*printf("\n Position: %d", mPosition.y);

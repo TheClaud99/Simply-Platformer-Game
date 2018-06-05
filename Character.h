@@ -23,6 +23,8 @@ class Character : public movingObject
 		bool mPrevInputs[284];
 
 		float mElapsedTime;
+
+		SDL_RendererFlip mFlip;
 };
 
 #endif
