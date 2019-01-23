@@ -22,20 +22,8 @@ const float MAX_FALLING_SPEED = 1500.0f;
 const float MIN_JUMP_SPEED = -400.0f;
 const float FRAME_MOVEMENT_UPDATE_TIME = 0.25f;
 
+const SDL_Point START_POSITION = {320, 240};
+
 extern float timeStep;
 
-const int GROUND = 400;
-
-//The possibles Character's state
-enum CharacterState
-{
-    Stand,
-    Walk,
-    Jump,
-    GrabLedge,
-    TotalStates
-};
-
-const int Walk2Frame = TotalStates;
-
-extern SDL_Rect gCharacterSpirteClips[];
+const int GROUND = 250;

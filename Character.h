@@ -7,6 +7,18 @@ class Character : public movingObject
 {
 	public:
 
+		//The possibles Character's state
+		enum CharacterState
+		{
+			Stand,
+			Walk,
+			Jump,
+			GrabLedge,
+			TotalStates
+		};
+
+		const int Walk2Frame = TotalStates;
+
 		Character();
 
 		bool Relased(SDL_Scancode key);
@@ -25,6 +37,10 @@ class Character : public movingObject
 		float mElapsedTime;
 
 		SDL_RendererFlip mFlip;
+
+		SDL_Rect gCharacterSpirteClips[TotalStates + 1];
+
+		CharacterState mCurrentState = CharacterState::Stand;
 };
 
 #endif

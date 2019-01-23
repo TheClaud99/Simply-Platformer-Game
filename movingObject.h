@@ -44,7 +44,6 @@ class movingObject
 		bool mWasAtCeiling;
 		bool mAtCeiling;
 
-		CharacterState mCurrentState = CharacterState::Stand;
 		float mJumpSpeed;
 		float mWalkSpeed;
 

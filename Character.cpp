@@ -7,6 +7,9 @@ Character::Character()
 		mInputs[i] = false;
 		mPrevInputs[i] = false;
 	}
+
+    mPosition.x = START_POSITION.x;
+    mPosition.y = START_POSITION.y;
 }
 
 bool Character::Relased(SDL_Scancode key)
@@ -26,12 +29,14 @@ bool Character::Pressed(SDL_Scancode key)
 
 void Character::CharacterUpdate()
 {
-    
+    SDL_Rect* state;
+
+    if(mCurrentState != CharacterState::Walk)
+        mTexture.render(START_POSITION.x, START_POSITION.y, &gCharacterSpirteClips[mCurrentState], mFlip);
+
     switch(mCurrentState)
     {
         case CharacterState::Stand:
-
-            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Stand], mFlip);
             
             mSpeed = {0.0f, 0.0f};
             
@@ -64,18 +69,16 @@ void Character::CharacterUpdate()
             break;
         
         case CharacterState::Walk:
-            
-            
 
             mElapsedTime += timeStep;
 
             if(mElapsedTime < FRAME_MOVEMENT_UPDATE_TIME)
             {
-                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk], mFlip);
+                mTexture.render(START_POSITION.x, START_POSITION.y, &gCharacterSpirteClips[Walk], mFlip);
             }
             else if(mElapsedTime < 2 * FRAME_MOVEMENT_UPDATE_TIME)
             {
-                mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Walk2Frame], mFlip);
+                mTexture.render(START_POSITION.x, START_POSITION.y, &gCharacterSpirteClips[Walk2Frame], mFlip);
             }
             else
             {
@@ -127,7 +130,6 @@ void Character::CharacterUpdate()
 
         case CharacterState::Jump:
 
-            mTexture.render(mPosition.x, mPosition.y, &gCharacterSpirteClips[Jump], mFlip);
             mSpeed.y += GRAVITY * timeStep;
             mSpeed.y = std::min(mSpeed.y, MAX_FALLING_SPEED);
 
